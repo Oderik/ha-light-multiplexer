@@ -31,6 +31,8 @@ class Source(LightEntity):
  async def async_turn_off(self,**kw):
   self.calls.append(('off',kw));self._attr_is_on=False;self.async_write_ha_state()
 
+from steady_signal import check_steady_signal
+
 async def main():
  directory=tempfile.mkdtemp(prefix='ha-mux-')
  shutil.copytree(str(Path(__file__).resolve().parents[1] / 'custom_components'),directory+'/custom_components')
@@ -86,6 +88,8 @@ async def main():
   assert main_entity.entity_id.endswith('_main')
  assert hass.states.get(main_entity.entity_id).name=='Test source Main'
  assert hass.states.get(signals[0]).attributes['effect_list']==['off','Pulse']
+ await check_steady_signal(hass, source, main_entity.entity_id, signals[0])
+ await hass.services.async_call('light','turn_on',{'entity_id':main_entity.entity_id,'brightness':180},blocking=True)
  await hass.services.async_call('light','turn_on',{'entity_id':signals[0],'hs_color':[240,100],'brightness':40},blocking=True)
  assert source.calls[-1][1]['brightness']==180,source.calls
  await hass.services.async_call('light','turn_on',{'entity_id':signals[0],'effect':'Pulse'},blocking=True)
