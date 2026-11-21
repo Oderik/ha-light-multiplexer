@@ -21,9 +21,10 @@
           "count": "Number of signal lights",
           "hold": "Hold duration (seconds)",
           "pause": "Pause duration (seconds)",
-          "fade": "Transition in each direction (seconds, 0 = blinking)"
+          "fade": "Transition in each direction (seconds, 0 = blinking)",
+          "take_over_id": "Use the source entity ID for the main light"
         },
-        "description": "Higher signal numbers take priority among steady signals. Hold and pause durations are additional to transitions."
+        "description": "Higher signal numbers take priority among steady signals. Hold and pause durations are additional to transitions. If enabled, the main light takes {original} and the physical source moves to {alias}."
       }
     },
     "error": {

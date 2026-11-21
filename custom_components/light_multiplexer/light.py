@@ -25,7 +25,7 @@ class MultiplexLight(LightEntity):
         source_name = source.name if source else entry.title
         suffix = "Main" if role == "base" else f"Signal {index}"
         self._attr_name = f"{source_name} {suffix}"
-        object_id = self.controller.source.split(".", 1)[1]
+        object_id = entry.data.get("id_transfer", {}).get("original", self.controller.source).split(".", 1)[1]
         self.entity_id = f"light.{object_id}_{'main' if role == 'base' else f'signal_{index}'}"
         self._attr_color_mode = ColorMode.COLOR_TEMP if role == "base" else ColorMode.HS
         self._attr_supported_color_modes = {self._attr_color_mode}

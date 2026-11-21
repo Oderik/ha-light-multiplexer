@@ -55,6 +55,11 @@ async def main():
  await hass.data['light'].async_add_entities([source])
  await hass.async_block_till_done()
  print('SOURCE',source.entity_id,flush=True)
+ original_id=source.entity_id
+ takeover='--takeover' in sys.argv
+ collision='--collision' in sys.argv
+ if collision:
+  hass.states.async_set(original_id+'_source','on')
  flow=await hass.config_entries.flow.async_init('light_multiplexer',context={'source':'user'})
  print('FLOW',flow['type'],flush=True)
  result=await hass.config_entries.flow.async_configure(flow['flow_id'],{'source':source.entity_id,'hide_source':True})
@@ -62,7 +67,7 @@ async def main():
  assert any(str(key)=='fade' for key in result['data_schema'].schema)
  defaults=result['data_schema']({})
  assert defaults['hold']==1 and defaults['pause']==2 and defaults['fade']==0.25,defaults
- result=await hass.config_entries.flow.async_configure(flow['flow_id'],{'count':3,'hold':0.1,'pause':0.1,'fade':0})
+ result=await hass.config_entries.flow.async_configure(flow['flow_id'],{'take_over_id':takeover,'count':3,'hold':0.1,'pause':0.1,'fade':0})
  print('CREATED',result['type'],flush=True)
  await hass.async_block_till_done()
  entry=result['result']
@@ -74,7 +79,11 @@ async def main():
  signals=[e.entity_id for e in entities if e.unique_id.endswith('_signal')]
  assert len(signals)==1
  main_entity=next(e for e in entities if e.unique_id.endswith('_base'))
- assert main_entity.entity_id.endswith('_main')
+ if takeover:
+  assert main_entity.entity_id==original_id
+  assert source.entity_id==original_id+('_source_2' if collision else '_source')
+ else:
+  assert main_entity.entity_id.endswith('_main')
  assert hass.states.get(main_entity.entity_id).name=='Test source Main'
  assert hass.states.get(signals[0]).attributes['effect_list']==['off','Pulse']
  await hass.services.async_call('light','turn_on',{'entity_id':signals[0],'hs_color':[240,100],'brightness':40},blocking=True)
@@ -144,6 +153,19 @@ async def main():
  await hass.config_entries.options.async_configure(options['flow_id'],{'source':source.entity_id,'hide_source':False})
  await hass.async_block_till_done()
  assert er.async_get(hass).async_get(source.entity_id).hidden_by is None
+ if '--remove-now' in sys.argv:
+  expected=original_id
+  if '--manual-rename' in sys.argv:
+   expected='light.user_selected'
+   er.async_get(hass).async_update_entity(source.entity_id,new_entity_id=expected)
+   await hass.async_block_till_done()
+  await hass.config_entries.async_remove(entry.entry_id)
+  await hass.async_block_till_done()
+  assert source.entity_id==expected,source.entity_id
+  assert hass.states.get(expected) is not None
+  await hass.async_stop(force=True)
+  print('REMOVAL PASSED',flush=True)
+  return
  # A replacement source receives output, while existing virtual identities persist.
  replacement=Source()
  replacement._attr_unique_id='replacement-test'
@@ -180,6 +202,8 @@ async def main():
  await hass.config_entries.async_remove(entry.entry_id)
  await hass.async_block_till_done()
  assert er.async_get(hass).async_get(replacement.entity_id).hidden_by is None
+ if takeover:
+  assert source.entity_id==original_id, source.entity_id
  print('INTEGRATION SMOKE PASSED',flush=True)
  await hass.async_stop(force=True)
 asyncio.run(main())

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.3 — Optional source entity ID takeover
+
+New helpers can give the main light the source’s original entity ID. Setup previews the physical source’s new ID. The option is disabled by default. Removing the helper restores the original ID when it is free and the source still uses the assigned alias.
+
 ## 0.3.2 — English defaults and HACS metadata
 
 - Translate the README, changelog, default configuration strings and English localization; retain the German localization.

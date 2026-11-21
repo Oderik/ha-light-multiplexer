@@ -7,6 +7,7 @@ from homeassistant.components.light import LightEntityFeature
 from homeassistant.core import callback
 from homeassistant.helpers import entity_registry as er, selector
 
+from .entity_ids import source_alias
 from .const import DEFAULT_HOLD, DEFAULT_PAUSE, DEFAULT_FADE
 
 DOMAIN = "light_multiplexer"
@@ -27,6 +28,7 @@ def source_schema(values):
 def settings_schema(hass, values, include_count=True):
     fields = {}
     if include_count:
+        fields[vol.Optional("take_over_id", default=False)] = selector.BooleanSelector()
         fields[vol.Required("count", default=values.get("count", 1))] = number(1, 1)
     fields[vol.Required("hold", default=values.get("hold", DEFAULT_HOLD))] = number(0.1, 0.1)
     fields[vol.Required("pause", default=values.get("pause", DEFAULT_PAUSE))] = number(0.1, 0.1)
@@ -91,7 +93,7 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 self._abort_if_unique_id_configured()
                 state = self.hass.states.get(self.values["source"])
                 return self.async_create_entry(title=f"{state.name} · Light Multiplexer", data=self.values)
-        return self.async_show_form(step_id="settings", data_schema=settings_schema(self.hass, self.values), errors=errors)
+        return self.async_show_form(step_id="settings", description_placeholders={"original": self.values["source"], "alias": source_alias(self.hass, self.values["source"])}, data_schema=settings_schema(self.hass, self.values), errors=errors)
 
     @staticmethod
     @callback

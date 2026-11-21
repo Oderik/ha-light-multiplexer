@@ -19,6 +19,8 @@ Restart Home Assistant after installing or updating the integration's Python cod
 3. Go to **Settings → Devices & services → Helpers → Create helper** and select **Light Multiplexer**. Alternatively, use **Add integration**. Refresh the frontend if an old label appears.
 4. Select a source light and the number of signals (one by default).
 
+During setup, you can optionally give the main light the original source entity ID. The physical source moves to a free ID ending in `_source` (numbered on collision). This is off by default. Existing actions targeting the original entity ID then control the main light. Device targets keep their device semantics. On helper removal, the integration restores the original source ID if available and the source still has its assigned alias. If you replace the source, the main light keeps its ID and the original source keeps its alias until helper removal.
+
 Initial setup sends no light command, so an already illuminated source stays on. The main light adopts its on/off state and brightness, with best-effort color-temperature initialization.
 
 ## Updating

@@ -21,9 +21,10 @@
           "count": "Anzahl Signallampen",
           "hold": "Leuchtdauer (Sekunden)",
           "pause": "Pausendauer (Sekunden)",
-          "fade": "Übergang je Richtung (Sekunden, 0 = Blinken)"
+          "fade": "Übergang je Richtung (Sekunden, 0 = Blinken)",
+          "take_over_id": "Quell-ID für das Hauptlicht übernehmen"
         },
-        "description": "Höhere Signalnummern haben bei Dauerlicht Vorrang. Leucht- und Pausenzeit zählen zusätzlich zu den Übergängen."
+        "description": "Höhere Signalnummern haben bei Dauerlicht Vorrang. Leucht- und Pausenzeit zählen zusätzlich zu den Übergängen. Bei Übernahme erhält das Hauptlicht {original}. Die Quelle wird auf {alias} umbenannt."
       }
     },
     "error": {
