@@ -1,0 +1,14 @@
+{
+  "domain": "light_multiplexer",
+  "name": "Light Multiplexer",
+  "version": "0.3.2",
+  "integration_type": "helper",
+  "config_flow": true,
+  "iot_class": "calculated",
+  "codeowners": [
+    "@Oderik"
+  ],
+  "requirements": [],
+  "documentation": "https://github.com/Oderik/ha-light-multiplexer",
+  "issue_tracker": "https://github.com/Oderik/ha-light-multiplexer/issues"
+}

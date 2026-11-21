@@ -1,0 +1,99 @@
+{
+  "title": "Light Multiplexer",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Quelllampe auswählen",
+        "data": {
+          "source": "Quelllampe",
+          "hide_source": "Quelllampe ausblenden",
+          "count": "Anzahl Signallampen",
+          "hold": "Leuchtdauer (Sekunden)",
+          "pause": "Pausendauer (Sekunden)",
+          "fade": "Übergang je Richtung (Sekunden, 0 = Blinken)"
+        }
+      },
+      "settings": {
+        "title": "Signale und Pulszeiten",
+        "data": {
+          "source": "Quelllampe",
+          "hide_source": "Quelllampe ausblenden",
+          "count": "Anzahl Signallampen",
+          "hold": "Leuchtdauer (Sekunden)",
+          "pause": "Pausendauer (Sekunden)",
+          "fade": "Übergang je Richtung (Sekunden, 0 = Blinken)"
+        },
+        "description": "Höhere Signalnummern haben bei Dauerlicht Vorrang. Leucht- und Pausenzeit zählen zusätzlich zu den Übergängen."
+      }
+    },
+    "error": {
+      "invalid_source": "Eine verfügbare, aktivierte Farblampe auswählen.",
+      "no_color": "Die Quelle muss Farben unterstützen.",
+      "already_configured": "Diese Quelle wird bereits von einem Helfer verwaltet.",
+      "invalid_number": "Einen gültigen Wert eingeben. Die Signalanzahl muss ganzzahlig sein."
+    },
+    "abort": {
+      "already_configured": "Diese Quelle wird bereits von einem Helfer verwaltet."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "menu_options": {
+          "source": "Quelllampe und Sichtbarkeit",
+          "signals": "Signallampen",
+          "timing": "Pulszeiten"
+        }
+      },
+      "source": {
+        "title": "Quelllampe auswählen",
+        "data": {
+          "source": "Quelllampe",
+          "hide_source": "Quelllampe ausblenden",
+          "count": "Anzahl Signallampen",
+          "hold": "Leuchtdauer (Sekunden)",
+          "pause": "Pausendauer (Sekunden)",
+          "fade": "Übergang je Richtung (Sekunden, 0 = Blinken)"
+        }
+      },
+      "signals": {
+        "title": "Signallampen",
+        "data": {
+          "source": "Quelllampe",
+          "hide_source": "Quelllampe ausblenden",
+          "count": "Anzahl Signallampen",
+          "hold": "Leuchtdauer (Sekunden)",
+          "pause": "Pausendauer (Sekunden)",
+          "fade": "Übergang je Richtung (Sekunden, 0 = Blinken)"
+        },
+        "description": "Bei Dauerlicht gewinnt die höchste aktive Signalnummer. Namen und Entity-IDs werden in den Entitätseinstellungen geändert."
+      },
+      "timing": {
+        "title": "Signale und Pulszeiten",
+        "data": {
+          "source": "Quelllampe",
+          "hide_source": "Quelllampe ausblenden",
+          "count": "Anzahl Signallampen",
+          "hold": "Leuchtdauer (Sekunden)",
+          "pause": "Pausendauer (Sekunden)",
+          "fade": "Übergang je Richtung (Sekunden, 0 = Blinken)"
+        },
+        "description": "Höhere Signalnummern haben bei Dauerlicht Vorrang. Leucht- und Pausenzeit zählen zusätzlich zu den Übergängen."
+      },
+      "remove_signals": {
+        "title": "Signallampen entfernen",
+        "description": "Die Signale mit den höchsten Nummern und ihre gespeicherten Zustände werden entfernt. Fortfahren?"
+      }
+    },
+    "error": {
+      "invalid_source": "Eine verfügbare, aktivierte Farblampe auswählen.",
+      "no_color": "Die Quelle muss Farben unterstützen.",
+      "already_configured": "Diese Quelle wird bereits von einem Helfer verwaltet.",
+      "invalid_number": "Einen gültigen Wert eingeben. Die Signalanzahl muss ganzzahlig sein."
+    },
+    "abort": {
+      "unload_failed": "Der Helfer konnte nicht entladen werden. Bitte erneut versuchen.",
+      "setup_failed": "Die Einstellungen wurden gespeichert, der Helfer konnte aber nicht geladen werden. Bitte das Home-Assistant-Protokoll prüfen."
+    }
+  }
+}

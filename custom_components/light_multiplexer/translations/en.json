@@ -1,0 +1,99 @@
+{
+  "title": "Light Multiplexer",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Select a source light",
+        "data": {
+          "source": "Source light",
+          "hide_source": "Hide source light",
+          "count": "Number of signal lights",
+          "hold": "Hold duration (seconds)",
+          "pause": "Pause duration (seconds)",
+          "fade": "Transition in each direction (seconds, 0 = blinking)"
+        }
+      },
+      "settings": {
+        "title": "Signals and pulse timing",
+        "data": {
+          "source": "Source light",
+          "hide_source": "Hide source light",
+          "count": "Number of signal lights",
+          "hold": "Hold duration (seconds)",
+          "pause": "Pause duration (seconds)",
+          "fade": "Transition in each direction (seconds, 0 = blinking)"
+        },
+        "description": "Higher signal numbers take priority among steady signals. Hold and pause durations are additional to transitions."
+      }
+    },
+    "error": {
+      "invalid_source": "Select an available, enabled color light.",
+      "no_color": "The source must support colors.",
+      "already_configured": "This source is already managed by a helper.",
+      "invalid_number": "Enter a valid value. The signal count must be a whole number."
+    },
+    "abort": {
+      "already_configured": "This source is already managed by a helper."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "menu_options": {
+          "source": "Source light and visibility",
+          "signals": "Signal lights",
+          "timing": "Pulse timing"
+        }
+      },
+      "source": {
+        "title": "Select a source light",
+        "data": {
+          "source": "Source light",
+          "hide_source": "Hide source light",
+          "count": "Number of signal lights",
+          "hold": "Hold duration (seconds)",
+          "pause": "Pause duration (seconds)",
+          "fade": "Transition in each direction (seconds, 0 = blinking)"
+        }
+      },
+      "signals": {
+        "title": "Signal lights",
+        "data": {
+          "source": "Source light",
+          "hide_source": "Hide source light",
+          "count": "Number of signal lights",
+          "hold": "Hold duration (seconds)",
+          "pause": "Pause duration (seconds)",
+          "fade": "Transition in each direction (seconds, 0 = blinking)"
+        },
+        "description": "The highest active signal number takes priority among steady signals. Edit names and entity IDs in the entity settings."
+      },
+      "timing": {
+        "title": "Signals and pulse timing",
+        "data": {
+          "source": "Source light",
+          "hide_source": "Hide source light",
+          "count": "Number of signal lights",
+          "hold": "Hold duration (seconds)",
+          "pause": "Pause duration (seconds)",
+          "fade": "Transition in each direction (seconds, 0 = blinking)"
+        },
+        "description": "Higher signal numbers take priority among steady signals. Hold and pause durations are additional to transitions."
+      },
+      "remove_signals": {
+        "title": "Remove signal lights",
+        "description": "The highest-numbered signals and their saved states will be removed. Continue?"
+      }
+    },
+    "error": {
+      "invalid_source": "Select an available, enabled color light.",
+      "no_color": "The source must support colors.",
+      "already_configured": "This source is already managed by a helper.",
+      "invalid_number": "Enter a valid value. The signal count must be a whole number."
+    },
+    "abort": {
+      "unload_failed": "The helper could not be unloaded. Please try again.",
+      "setup_failed": "The settings were saved, but the helper could not be loaded. Please check the Home Assistant log."
+    }
+  }
+}
